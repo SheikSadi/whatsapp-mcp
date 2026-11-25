@@ -12,7 +12,13 @@ import requests
 import audio
 
 # Configuration via environment variables with sensible defaults
-_DEFAULT_BRIDGE_STORE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "whatsapp-bridge", "store")
+# DATA_DIR (shared with the bridge, which keeps its store/ there) wins over the
+# upstream layout of store/ next to the bridge sources.
+_DEFAULT_BRIDGE_STORE_DIR = (
+    os.path.join(os.environ["DATA_DIR"].strip(), "store")
+    if os.getenv("DATA_DIR", "").strip()
+    else os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "whatsapp-bridge", "store")
+)
 MESSAGES_DB_PATH = os.getenv(
     "WHATSAPP_DB_PATH",
     os.path.join(_DEFAULT_BRIDGE_STORE_DIR, "messages.db"),

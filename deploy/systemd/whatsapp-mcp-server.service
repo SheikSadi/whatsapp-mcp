@@ -1,0 +1,19 @@
+[Unit]
+Description=Remote WhatsApp MCP server (Streamable HTTP on loopback)
+After=network-online.target whatsapp-bridge.service
+Wants=network-online.target whatsapp-bridge.service
+
+[Service]
+Type=simple
+User=__USER__
+EnvironmentFile=__HOME__/.config/whatsapp-mcp.env
+ExecStart=__REPO__/deploy/bin/mcp-start.sh
+Restart=always
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+# ~/.cloudflared/local.yml — named tunnel for local.sheiksadi.dev.
+# Each service on this host gets a path rule; cloudflared does not strip the
+# path, so the app itself serves under its prefix (BASE_PATH=/whatsapp).
+tunnel: __TUNNEL_ID__
+credentials-file: __HOME__/.cloudflared/__TUNNEL_ID__.json
+ingress:
+  - hostname: local.sheiksadi.dev
+    path: ^/whatsapp(/.*)?$
+    service: http://127.0.0.1:8791
+  - service: http_status:404
