@@ -90,6 +90,7 @@ For PR creation, hosted review, CI, and merge readiness, use the installed `baby
 | `WHATSAPP_MCP_TRANSPORT` | `stdio` | MCP transport to serve clients: `stdio`, `http`, or `sse` |
 | `WHATSAPP_MCP_HOST` | `127.0.0.1` | Bind address for the `http`/`sse` transports |
 | `WHATSAPP_MCP_PORT` | `8000` | Port for the `http`/`sse` transports |
+| `WHATSAPP_LOG_LEVEL` | `DEBUG` | Bridge log level (`DEBUG`, `INFO`, `WARN`, `ERROR`). `DEBUG` logs raw stanzas incl. QR payloads and message contents; use `INFO` for services |
 | `DATA_DIR` | unset | Bridge works in `$DATA_DIR` (state in `$DATA_DIR/store`); the MCP server's DB path defaults follow it |
 | `MCP_AUTH_TOKEN` | unset | Required by `remote.py` (remote HTTP entry point): bearer token, >= 32 chars. See `deploy/README.md` |
 | `PUBLIC_HOST` | unset | `remote.py`: public hostname allowed in `Host` (DNS-rebinding check) |

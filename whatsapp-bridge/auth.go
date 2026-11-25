@@ -96,7 +96,12 @@ func printTokenBanner(token string, port int) {
 	fmt.Println("════════════════════════════════════════════════════════════════════")
 	fmt.Println("  WHATSAPP BRIDGE AUTH TOKEN — first-time setup")
 	fmt.Println("════════════════════════════════════════════════════════════════════")
-	fmt.Printf("  Token:          %s\n", token)
+	if stdoutIsTerminal() {
+		fmt.Printf("  Token:          %s\n", token)
+	} else {
+		// Under a service manager stdout is a log (journald, files): keep the secret out of it.
+		fmt.Println("  Token:          (not printed: stdout is not a terminal; read the file below)")
+	}
 	fmt.Printf("  Stored at:      %s (mode 0600)\n", tokenFilePath)
 	fmt.Printf("  Bridge URL:     http://127.0.0.1:%d/api\n", port)
 	fmt.Println()
