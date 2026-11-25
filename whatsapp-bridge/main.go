@@ -3016,6 +3016,11 @@ func main() {
 	logger := waLog.Stdout("Client", "DEBUG", true)
 	logger.Infof("Starting WhatsApp client...")
 
+	if err := enterDataDir(); err != nil {
+		logger.Errorf("Failed to use DATA_DIR: %v", err)
+		os.Exit(1)
+	}
+
 	logger.Infof("%s", webhookStartupMessage(forwardSelfMessages))
 
 	// Create database connection for storing session data

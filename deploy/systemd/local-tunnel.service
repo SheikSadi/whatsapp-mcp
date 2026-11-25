@@ -1,0 +1,14 @@
+[Unit]
+Description=Cloudflare Tunnel for local.sheiksadi.dev
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+ExecStart=/usr/bin/cloudflared tunnel --no-autoupdate --config __HOME__/.cloudflared/local.yml run
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
