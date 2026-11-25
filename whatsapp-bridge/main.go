@@ -3013,7 +3013,7 @@ func main() {
 	flag.Parse()
 
 	// Set up logger with DEBUG level for more detailed logging
-	logger := waLog.Stdout("Client", "DEBUG", true)
+	logger := waLog.Stdout("Client", logLevel(), stdoutIsTerminal())
 	logger.Infof("Starting WhatsApp client...")
 
 	if err := enterDataDir(); err != nil {
@@ -3024,7 +3024,7 @@ func main() {
 	logger.Infof("%s", webhookStartupMessage(forwardSelfMessages))
 
 	// Create database connection for storing session data
-	dbLog := waLog.Stdout("Database", "INFO", true)
+	dbLog := waLog.Stdout("Database", "INFO", stdoutIsTerminal())
 
 	// Create directory for database if it doesn't exist. Owner-only (0700),
 	// same reasoning as NewMessageStore.
